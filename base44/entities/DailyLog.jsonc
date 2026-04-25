@@ -1,0 +1,54 @@
+{
+  "name": "DailyLog",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the log"
+    },
+    "meals_eaten": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of meals eaten today"
+    },
+    "workouts_done": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of workouts completed today"
+    },
+    "habits_done": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of habits completed today"
+    },
+    "water_glasses": {
+      "type": "number",
+      "default": 0,
+      "description": "Glasses of water consumed"
+    },
+    "mood": {
+      "type": "string",
+      "enum": [
+        "great",
+        "good",
+        "okay",
+        "low"
+      ],
+      "description": "Mood of the day"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Reflections on the day"
+    }
+  },
+  "required": [
+    "date"
+  ]
+}

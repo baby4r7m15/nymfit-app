@@ -1,0 +1,30 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "user"
+      ],
+      "default": "user"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Custom display name set by the user"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Short bio"
+    },
+    "avatar_emoji": {
+      "type": "string",
+      "description": "Emoji avatar"
+    },
+    "goal": {
+      "type": "string",
+      "description": "Personal glow-up goal"
+    }
+  }
+}
