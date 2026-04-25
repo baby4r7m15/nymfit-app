@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 340 60% 98%;
+    --foreground: 330 25% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 330 25% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 330 25% 18%;
+
+    /* Hot pink / rose primary */
+    --primary: 336 80% 68%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Soft lavender secondary */
+    --secondary: 290 40% 94%;
+    --secondary-foreground: 290 30% 30%;
+
+    --muted: 340 30% 96%;
+    --muted-foreground: 330 15% 50%;
+
+    /* Blush accent */
+    --accent: 345 90% 95%;
+    --accent-foreground: 336 60% 40%;
+
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 336 40% 90%;
+    --input: 336 40% 90%;
+    --ring: 336 80% 68%;
+
+    --chart-1: 336 80% 68%;
+    --chart-2: 290 55% 70%;
+    --chart-3: 200 55% 70%;
+    --chart-4: 30 80% 72%;
+    --chart-5: 160 45% 65%;
+
+    --radius: 1.25rem;
+
+    --sidebar-background: 340 50% 97%;
+    --sidebar-foreground: 330 25% 20%;
+    --sidebar-primary: 336 80% 68%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 345 90% 95%;
+    --sidebar-accent-foreground: 336 60% 40%;
+    --sidebar-border: 336 40% 90%;
+    --sidebar-ring: 336 80% 68%;
+
+    --font-display: 'Pacifico', cursive;
+    --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .dark {
+    --background: 330 20% 8%;
+    --foreground: 340 30% 95%;
+    --card: 330 18% 11%;
+    --card-foreground: 340 30% 95%;
+    --popover: 330 18% 11%;
+    --popover-foreground: 340 30% 95%;
+    --primary: 336 75% 65%;
+    --primary-foreground: 330 20% 8%;
+    --secondary: 290 20% 18%;
+    --secondary-foreground: 290 30% 90%;
+    --muted: 330 15% 18%;
+    --muted-foreground: 330 15% 60%;
+    --accent: 345 30% 22%;
+    --accent-foreground: 345 70% 85%;
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 330 15% 22%;
+    --input: 330 15% 22%;
+    --ring: 336 75% 65%;
+    --chart-1: 336 75% 65%;
+    --chart-2: 290 50% 70%;
+    --chart-3: 200 55% 70%;
+    --chart-4: 30 75% 70%;
+    --chart-5: 160 45% 65%;
+    --sidebar-background: 330 18% 10%;
+    --sidebar-foreground: 340 30% 90%;
+    --sidebar-primary: 336 75% 65%;
+    --sidebar-primary-foreground: 330 20% 8%;
+    --sidebar-accent: 345 30% 22%;
+    --sidebar-accent-foreground: 345 70% 85%;
+    --sidebar-border: 330 15% 20%;
+    --sidebar-ring: 336 75% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+.bg-sniff-gradient {
+  background: linear-gradient(135deg, hsl(340 80% 97%) 0%, hsl(290 50% 96%) 50%, hsl(340 60% 98%) 100%);
+}
+
+.bubble-border {
+  border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
+}
