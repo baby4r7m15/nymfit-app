@@ -22,13 +22,18 @@ body {
 .bg {
   position: absolute;
   inset: 0;
+  z-index: -2;
+
   background: linear-gradient(
     180deg,
-    #0b1220 0%,
-    #101a33 40%,
-    #1a0f1a 100%
+    #7fd3ff 0%,
+    #c8f0ff 25%,
+    #ffffff 50%,
+    #ffd1dc 75%,
+    #ff9bb5 100%
   );
-  z-index: -2;
+
+  filter: saturate(1.1) contrast(1.05);
 }
 
 /* HERO */
