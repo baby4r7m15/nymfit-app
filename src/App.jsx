@@ -1,50 +1,38 @@
 export default function App() {
   return (
     <div className="page">
-      <div className="bgGlow" />
+      {/* background glow */}
+      <div className="bg" />
 
+      {/* NAV */}
       <header className="nav">
         <div className="logo">NymFit</div>
-        <button className="navBtn">Get Started</button>
+
+        <div className="profile">
+          <div className="avatar">🌸</div>
+          <span>Artemis</span>
+        </div>
       </header>
 
+      {/* HERO */}
       <main className="hero">
-        <h1>
-          Build your body,<br />
-          your way
+        <div className="pill">
+          ✨ Your femme body made easy
+        </div>
+
+        <h1 className="title">
+          soft curves,<br />
+          softer you.
         </h1>
 
-        <p>
-          A simple, aesthetic fitness tracker designed for consistency,
-          comfort, and self-expression.
+        <p className="subtitle">
+          Track your feminization journey, shape your silhouette &amp; celebrate every soft, beautiful win.
         </p>
 
-        <div className="ctaRow">
-          <button className="primaryBtn">Start Tracking</button>
-          <button className="secondaryBtn">Learn More</button>
-        </div>
-
-        <div className="cardGrid">
-          <div className="card">
-            <h3>Workout Tracking</h3>
-            <p>Log workouts without clutter or pressure.</p>
-          </div>
-
-          <div className="card">
-            <h3>Habit Building</h3>
-            <p>Small daily wins that actually stick.</p>
-          </div>
-
-          <div className="card">
-            <h3>Soft Aesthetic</h3>
-            <p>Designed to feel calm, not intimidating.</p>
-          </div>
-        </div>
+        <button className="cta">
+          start your glow-up ✨ →
+        </button>
       </main>
-
-      <footer className="footer">
-        <p>Made with care ✨</p>
-      </footer>
     </div>
   )
 }
