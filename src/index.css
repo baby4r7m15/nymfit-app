@@ -72,10 +72,25 @@ body {
 
 /* PILL */
 .pill {
-  background: rgba(11, 18, 32, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(12px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 500;
+
   color: #ffb3c7;
+
+  background: rgba(11, 18, 32, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(10px);
+
+  width: fit-content;
+  margin: 0 auto 20px auto;
 }
 
 /* CTA */
