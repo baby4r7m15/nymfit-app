@@ -11,7 +11,7 @@ const FEATURES = [
 
 export default function App() {
   const handleCTA = () => {
-    window.location.href = "/dashboard";
+    window.location.href = "https://app.nymfit.com/dashboard";
   };
 
   return (
@@ -33,8 +33,8 @@ export default function App() {
           </div>
 
           <h1 className="title">
-            soft curves,<br />
-            softer you.
+            <span className="soft">soft</span> curves,<br />
+              softer <span className="you">you</span>.
           </h1>
 
           <p className="subtitle">
