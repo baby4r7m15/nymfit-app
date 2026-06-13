@@ -11,7 +11,7 @@ const FEATURES = [
 
 export default function App() {
   const handleCTA = () => {
-    window.location.href = "https://app.nymfit.com/dashboard";
+    window.location.href = "https://nymfit.com";
   };
 
   return (
