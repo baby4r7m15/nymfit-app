@@ -180,7 +180,7 @@ export default function NymLanding() {
         NymFit PROTOCOL © 2026 // ALL RIGHTS RESERVED
       </footer>
 
-      {/* --- SELF-CONTAINED AUTH MODAL PANEL --- */}
+            {/* --- SELF-CONTAINED AUTH MODAL PANEL --- */}
       <AnimatePresence>
         {showAuthModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
@@ -191,6 +191,7 @@ export default function NymLanding() {
               className="bg-[#13131a] border border-pink-500/30 w-full max-w-md p-6 rounded-lg relative shadow-2xl"
             >
               <button 
+                type="button"
                 onClick={() => setShowAuthModal(false)}
                 className="absolute top-4 right-4 text-slate-500 hover:text-slate-200 font-mono text-xs"
               >
@@ -222,13 +223,39 @@ export default function NymLanding() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-pink-500/50 transition-colors font-mono"placeholder="••••••••"/>
-                  {message.text &&(
-              <div className={text-xs font-mono p-2.5 rounded border ${message.type === 'success' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' : 'bg-rose-500/10 border-rose-500/30 text-rose-400'}}>
-                  {message.text}
-                  
-                  )}
-                  
+                    className="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-pink-500/50 transition-colors font-mono"
+                    placeholder="••••••••"
+                  />
+                </div>
+
+                {message.text && (
+                  <div className={`text-xs font-mono p-2.5 rounded border ${message.type === 'success' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' : 'bg-rose-500/10 border-rose-500/30 text-rose-400'}`}>
+                    {message.text}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-2.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded font-mono text-xs tracking-widest uppercase font-bold text-white transition-all hover:brightness-110 disabled:opacity-50"
+                >
                   {loading ? 'RUNNING PROTOCOL...' : isSignUp ? 'REGISTER PLAYER' : 'CONFIRM ACCESS'}
-                  
-                  <buttontype="button"onClick={() => { setIsSignUp(!isSignUp); setMessage({text:'', type:''}); }}className="text-[11px] font-mono text-slate-500 hover:text-pink-400 transition-colors">{isSignUp ? 'Already registered? Login here' : 'New user? Create your credentials'}</motion.div>)});}
+                </button>
+              </form>
+
+              <div className="mt-4 text-center">
+                <button
+                  type="button"
+                  onClick={() => { setIsSignUp(!isSignUp); setMessage({text:'', type:''}); }}
+                  className="text-[11px] font-mono text-slate-500 hover:text-pink-400 transition-colors"
+                >
+                  {isSignUp ? 'Already registered? Login here' : 'New user? Create your credentials'}
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
