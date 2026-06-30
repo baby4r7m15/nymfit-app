@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Swords, Shield, Zap, Heart, Lock, Key, ChevronRight, CheckCircle } from 'lucide-react';
+import { Swords, Shield, Lock, ChevronRight } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase directly within the file using your Vite environment variables
@@ -98,7 +98,7 @@ export default function NymLanding() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         setMessage({ text: 'Welcome back, Player! Redirecting...', type: 'success' });
-        // Redirect logic can be added here (e.g., window.location.href = '/dashboard')
+        window.location.reload();
       }
     } catch (err) {
       setMessage({ text: err.message, type: 'error' });
@@ -154,7 +154,7 @@ export default function NymLanding() {
         </motion.div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-grid-cols-3 gap-4 w-full mt-16 text-left">
+        <div className="grid md:grid-cols-3 gap-4 w-full mt-16 text-left">
           {FEATURES.map((feat, idx) => (
             <motion.div
               key={idx}
@@ -217,12 +217,18 @@ export default function NymLanding() {
 
                 <div>
                   <label className="block text-[10px] font-mono tracking-wider uppercase text-slate-400 mb-1">Access Key (Password)</label>
-                  <inputtype="password"requiredvalue={password}onChange={(e) => setPassword(e.target.value)}className="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-pink-500/50 transition-colors font-mono"placeholder="••••••••"/>
-                  {message.text && (<div className={text-xs font-mono p-2.5 rounded border ${message.type === 'success' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' : 'bg-rose-500/10 border-rose-500/30 text-rose-400'}}>
-                  {message.text})}
-                  {loading ? 'RUNNING PROTOCOL...' : isSignUp ? 'REGISTER PLAYER' : 'CONFIRM ACCESS'}<buttononClick={() => { setIsSignUp(!isSignUp); setMessage({text:'', type:''}); }}className="text-[11px] font-mono text-slate-500 hover:text-pink-400 transition-colors">
-                  {isSignUp ? 'Already registered? Login here' : 'New user? Create your credentials'}
-                </motion.div>
-                )}
-                );
-                }
+                  <input 
+                    type="password" 
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-pink-500/50 transition-colors font-mono"placeholder="••••••••"/>
+                  {message.text &&(
+              <div className={text-xs font-mono p-2.5 rounded border ${message.type === 'success' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' : 'bg-rose-500/10 border-rose-500/30 text-rose-400'}}>
+                  {message.text}
+                  
+                  )}
+                  
+                  {loading ? 'RUNNING PROTOCOL...' : isSignUp ? 'REGISTER PLAYER' : 'CONFIRM ACCESS'}
+                  
+                  <buttontype="button"onClick={() => { setIsSignUp(!isSignUp); setMessage({text:'', type:''}); }}className="text-[11px] font-mono text-slate-500 hover:text-pink-400 transition-colors">{isSignUp ? 'Already registered? Login here' : 'New user? Create your credentials'}</motion.div>)});}
