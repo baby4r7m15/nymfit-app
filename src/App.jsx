@@ -1,90 +1,91 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Sparkles, ArrowRight } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { createClient } from "@supabase/supabase-js";
 
-const FEATURES = [
-  { icon: "🍑", title: "Soft body goals", desc: "Track curves, hips & waist to celebrate your femme silhouette." },
-  { icon: "🌸", title: "Feminisation journey", desc: "Log HRT, skincare & femme habits tailored just for you." },
-  { icon: "📸", title: "Safe community", desc: "Share your glow-up with girls & femboys who truly get it." },
-  { icon: "✨", title: "Every win counts", desc: "Zero judgment — every soft step of your journey matters." }
-];
+// Import your newly created single-file landing system
+import NymLanding from "./NymLanding";
+
+// Import your application's modular page components
+// (Double-check your file tree paths for these views!)
+import Dashboard from "./pages/Dashboard";
+import Food from "./pages/Food";
+import Workouts from "./pages/Workouts";
+import Profile from "./pages/Profile";
+import Community from "./pages/Community";
+import Leaderboard from "./pages/Leaderboard";
+
+// Initialize the master Supabase authenticator check
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function App() {
-  const handleCTA = () => {
-    window.location.href = "https://nymfit.com";
-  };
+  const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Automatically monitor if a user is securely logged in via Supabase
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setLoading(false);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // Show a loading screen while Supabase confirms user authentication tokens
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0d0d11] flex items-center justify-center font-mono text-pink-400">
+        INITIALIZING NYMFIT SYSTEM v3.7...
+      </div>
+    );
+  }
 
   return (
-    <div className="page">
+    <BrowserRouter>
+      <Routes>
+        {/* LANDING PAGE ROUTE */}
+        {/* If logged in, skip landing and push straight to internal dashboard */}
+        <Route 
+          path="/" 
+          element={session ? <Navigate to="/dashboard" replace /> : <NymLanding />} 
+        />
 
-      {/* BACKGROUND */}
-      <div className="bg" />
+        {/* SECURE APPLICATION ROUTES */}
+        {/* If a random visitor tries to access these paths, they get rejected back to landing */}
+        <Route 
+          path="/dashboard" 
+          element={session ? <Dashboard session={session} /> : <Navigate to="/" replace />} 
+        />
+        <Route 
+          path="/food" 
+          element={session ? <Food session={session} /> : <Navigate to="/" replace />} 
+        />
+        <Route 
+          path="/workouts" 
+          element={session ? <Workouts session={session} /> : <Navigate to="/" replace />} 
+        />
+        <Route 
+          path="/profile" 
+          element={session ? <Profile session={session} /> : <Navigate to="/" replace />} 
+        />
+        <Route 
+          path="/community" 
+          element={session ? <Community session={session} /> : <Navigate to="/" replace />} 
+        />
+        <Route 
+          path="/leaderboard" 
+          element={session ? <Leaderboard session={session} /> : <Navigate to="/" replace />} 
+        />
 
-      {/* HERO */}
-      <section className="hero">
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="pill">
-            <Sparkles size={14} /> Your femme body made easy
-          </div>
-
-          <h1 className="title">
-            <span className="soft">soft</span> curves,<br />
-              softer <span className="you">you</span>.
-          </h1>
-
-          <p className="subtitle">
-            Track your journey, shape your silhouette & celebrate every soft win 🏳️‍⚧️✨
-          </p>
-
-          <button className="cta" onClick={handleCTA}>
-            start your glow-up <ArrowRight size={16} />
-          </button>
-        </motion.div>
-
-        {/* FEATURES */}
-        <div className="features">
-          {FEATURES.map((f, i) => (
-            <div key={i} className="card">
-              <div className="icon">{f.icon}</div>
-              <div className="card-title">{f.title}</div>
-              <div className="card-desc">{f.desc}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* STATS */}
-        <div className="stats">
-          <div className="stat">
-            <div className="emoji">💗</div>
-            <div className="num">1,240</div>
-            <div className="label">members</div>
-          </div>
-
-          <div className="stat">
-            <div className="emoji">✨</div>
-            <div className="num">8,930</div>
-            <div className="label">habits tracked</div>
-          </div>
-
-          <div className="stat">
-            <div className="emoji">📸</div>
-            <div className="num">2,110</div>
-            <div className="label">stories</div>
-          </div>
-        </div>
-
-      </section>
-
-      {/* FOOTER */}
-      <footer className="footer">
-        NymFit • made with ♡
-      </footer>
-
-    </div>
+        {/* FALLBACK ROUTE: Catch-all broken links redirect home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
