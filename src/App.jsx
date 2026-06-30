@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // ALL INTERNAL DEPENDENCIES RE-MAPPED TO CORRECT RELATIVE SUB-FOLDERS
 import { Toaster } from "./components/ui/toaster";
 import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClientInstance } from './query-client'; // FIXED: Pointing directly to the root source folder
+import { queryClientInstance } from './lib/query-client.js';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 import { UserProvider, useUser } from './lib/UserContext';
