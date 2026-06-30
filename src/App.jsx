@@ -23,7 +23,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 
 // Lazy-loaded pages
-const Landing   = lazy(() => import('./pages/Landing'));
+const Landing   = lazy(() => import('./pages/NymLanding'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Food      = lazy(() => import('./pages/Food'));
 const Profile   = lazy(() => import('./pages/Profile'));
