@@ -1,35 +1,38 @@
-import React, { lazy, Suspense, useEffect } from 'react';
-import { Toaster } from "@/components/ui/toaster"
-import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClientInstance } from '@/lib/query-client'
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
-import PageNotFound from './lib/PageNotFound';
-import { AuthProvider, useAuth } from '@/lib/AuthContext';
-import { UserProvider, useUser } from '@/lib/UserContext';
-import UserNotRegisteredError from '@/components/UserNotRegisteredError';
-import ProtectedRoute from '@/components/ProtectedRoute';
-import Layout from '@/components/Layout';
-import InstallBanner from '@/components/InstallBanner';
-import GlobalAnnouncementPopup from '@/components/GlobalAnnouncementPopup';
-import PwaGuard from '@/components/PwaGuard';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// FIXED PATHS: Changed from "@/" to normal relative paths
+import { Toaster } from "./components/ui/toaster"
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClientInstance } from './lib/query-client'
+import PageNotFound from './lib/PageNotFound';
+import { AuthProvider, useAuth } from './lib/AuthContext';
+import { UserProvider, useUser } from './lib/UserContext';
+import UserNotRegisteredError from './components/UserNotRegisteredError';
+import ProtectedRoute from './components/ProtectedRoute';
+import Layout from './components/Layout';
+import InstallBanner from './components/InstallBanner';
+import GlobalAnnouncementPopup from './components/GlobalAnnouncementPopup';
+import PwaGuard from './components/PwaGuard';
+
 // Auth pages
-import Login from '@/pages/Login';
-import Register from '@/pages/Register';
-import ForgotPassword from '@/pages/ForgotPassword';
-import ResetPassword from '@/pages/ResetPassword';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 // Lazy-loaded pages
-const Landing   = lazy(() => import('@/pages/Landing'));
-const Dashboard = lazy(() => import('@/pages/Dashboard'));
-const Food      = lazy(() => import('@/pages/Food'));
-const Profile   = lazy(() => import('@/pages/Profile'));
-const Admin       = lazy(() => import('@/pages/Admin'));
-const BodyProgress = lazy(() => import('@/pages/BodyProgress'));
-const Workouts     = lazy(() => import('@/pages/Workouts'));
-const Community    = lazy(() => import('@/pages/Community'));
-const Leaderboard  = lazy(() => import('@/pages/Leaderboard'));
+const Landing   = lazy(() => import('./pages/Landing'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Food      = lazy(() => import('./pages/Food'));
+const Profile   = lazy(() => import('./pages/Profile'));
+const Admin       = lazy(() => import('./pages/Admin'));
+const BodyProgress = lazy(() => import('./pages/BodyProgress'));
+const Workouts     = lazy(() => import('./pages/Workouts'));
+const Community    = lazy(() => import('./pages/Community'));
+const Leaderboard  = lazy(() => import('./pages/Leaderboard'));
+
 
 
 const pageVariants = {
