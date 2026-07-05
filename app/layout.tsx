@@ -1,19 +1,17 @@
 import "./globals.css";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "NymFit",
-  description: "Fitness for every femme journey."
-};
+import Particles from "@/components/Particles";
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Particles />
+        {children}
+      </body>
     </html>
   );
 }
