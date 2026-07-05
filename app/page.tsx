@@ -1,4 +1,10 @@
+"use client";
+
+import { useAuth } from "@/components/AuthProvider";
+
 export default function HomePage() {
+  const { user } = useAuth();
+
   return (
     <main>
 
@@ -12,9 +18,17 @@ export default function HomePage() {
           <a href="#about">About</a>
         </nav>
 
-        <button className="button button-primary">
-          LOGIN
-        </button>
+        {user ? (
+          <button className="button button-primary">
+            ENTER SYSTEM
+          </button>
+        ) : (
+          <a href="/login">
+            <button className="button button-primary">
+              LOGIN
+            </button>
+          </a>
+        )}
       </header>
 
       {/* HERO */}
@@ -22,11 +36,11 @@ export default function HomePage() {
 
         <div className="hero-grid">
 
-          {/* LEFT */}
+          {/* LEFT SIDE */}
           <div>
 
             <div className="hero-badge">
-              SYSTEM ONLINE
+              SYSTEM INITIALIZED
             </div>
 
             <h1>
@@ -35,18 +49,29 @@ export default function HomePage() {
             </h1>
 
             <p>
-              Track your habits, level up your consistency,
-              and transform your daily routine into a structured progression system.
+              Transform your habits into structured missions.
+              Track progress, build consistency, and level up your real life
+              like a systemized RPG interface.
             </p>
 
             <div className="hero-buttons">
-              <button className="button button-primary">
-                LINK START
-              </button>
+
+              {user ? (
+                <button className="button button-primary">
+                  ENTER DASHBOARD
+                </button>
+              ) : (
+                <a href="/login">
+                  <button className="button button-primary">
+                    LINK START
+                  </button>
+                </a>
+              )}
 
               <button className="button button-secondary">
                 VIEW SYSTEM
               </button>
+
             </div>
 
           </div>
@@ -55,13 +80,13 @@ export default function HomePage() {
           <div className="hero-panel">
 
             <div className="stat">
-              <span className="stat-label">LEVEL</span>
+              <span className="stat-label">SYSTEM LEVEL</span>
               <span className="stat-value">12</span>
             </div>
 
             <div className="stat">
-              <span className="stat-label">EXPERIENCE</span>
-              <span className="stat-value">7,420 XP</span>
+              <span className="stat-label">TOTAL XP</span>
+              <span className="stat-value">7,420</span>
             </div>
 
             <div className="bar">
@@ -76,13 +101,13 @@ export default function HomePage() {
             </div>
 
             <div className="stat">
-              <span className="stat-label">STREAK</span>
+              <span className="stat-label">CURRENT STREAK</span>
               <span className="stat-value">14 DAYS</span>
             </div>
 
             <div className="stat">
-              <span className="stat-label">FOCUS</span>
-              <span className="stat-value">CONSISTENCY</span>
+              <span className="stat-label">FOCUS MODE</span>
+              <span className="stat-value">ACTIVE</span>
             </div>
 
           </div>
@@ -100,17 +125,17 @@ export default function HomePage() {
 
           <div className="card">
             <h3>DAILY QUESTS</h3>
-            <p>Turn habits into structured missions with XP rewards.</p>
+            <p>Turn habits into structured RPG-style missions with XP rewards.</p>
           </div>
 
           <div className="card">
-            <h3>PROGRESSION</h3>
-            <p>Track your transformation through levels and streaks.</p>
+            <h3>PROGRESSION SYSTEM</h3>
+            <p>Level up your consistency and track long-term improvement.</p>
           </div>
 
           <div className="card">
-            <h3>ANALYTICS</h3>
-            <p>Visualize consistency, habits, and long-term trends.</p>
+            <h3>ANALYTICS ENGINE</h3>
+            <p>Visualize habits, streaks, and transformation over time.</p>
           </div>
 
         </div>
@@ -126,23 +151,40 @@ export default function HomePage() {
 
           <div className="stat-box">
             <div className="stat-number">12K+</div>
-            USERS
+            USERS ONLINE
           </div>
 
           <div className="stat-box">
             <div className="stat-number">98%</div>
-            CONSISTENCY
+            CONSISTENCY RATE
           </div>
 
           <div className="stat-box">
             <div className="stat-number">4.9</div>
-            RATING
+            SYSTEM RATING
           </div>
 
           <div className="stat-box">
             <div className="stat-number">24/7</div>
-            SYSTEM
+            ACTIVE SYSTEM
           </div>
+
+        </div>
+
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" className="section container">
+
+        <h2>ABOUT THE SYSTEM</h2>
+
+        <div className="card" style={{ marginTop: "40px" }}>
+
+          <p>
+            NymFit is a futuristic self-improvement system designed to turn
+            your daily habits into a structured progression experience.
+            Every action contributes to your growth, consistency, and long-term transformation.
+          </p>
 
         </div>
 
@@ -156,22 +198,22 @@ export default function HomePage() {
           <div>
             <h3>NYMFIT</h3>
             <p>
-              A futuristic self-improvement system
-              designed for structured growth and consistency.
+              A systemized fitness and self-growth platform
+              built around progression, consistency, and identity.
             </p>
           </div>
 
           <div>
             <h3>SYSTEM</h3>
-            <a href="#">Features</a>
-            <a href="#">Roadmap</a>
-            <a href="#">Updates</a>
+            <a href="#features">Features</a>
+            <a href="#stats">System Stats</a>
+            <a href="#about">About</a>
           </div>
 
           <div>
             <h3>ACCESS</h3>
-            <a href="#">Login</a>
-            <a href="#">Sign Up</a>
+            <a href="/login">Login</a>
+            <a href="#">Dashboard</a>
             <a href="#">Support</a>
           </div>
 
