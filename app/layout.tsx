@@ -1,5 +1,6 @@
 import "./globals.css";
 import Particles from "@/components/Particles";
+import AuthProvider from "@/components/AuthProvider";
 
 export default function RootLayout({
   children,
@@ -9,8 +10,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Particles />
-        {children}
+        <AuthProvider>
+          <Particles />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
