@@ -1,8 +1,18 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
+import {
+  User,
+  Session,
+  AuthChangeEvent,
+} from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
-import type { User } from "@supabase/supabase-js";
 
 type AuthContextType = {
   user: User | null;
@@ -14,38 +24,64 @@ const AuthContext = createContext<AuthContextType>({
   loading: true,
 });
 
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {
+  return useContext(AuthContext);
+}
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
 
 export default function AuthProvider({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      setUser(data.user ?? null);
+    let mounted = true;
+
+    async function loadUser() {
+      const { data, error } = await supabase.auth.getUser();
+
+      if (!mounted) return;
+
+      if (error) {
+        console.error(error);
+        setUser(null);
+      } else {
+        setUser(data.user);
+      }
+
       setLoading(false);
-    };
+    }
 
-    getUser();
+    loadUser();
 
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(
+      (_event: AuthChangeEvent, session: Session | null) => {
+        if (!mounted) return;
+
         setUser(session?.user ?? null);
+        setLoading(false);
       }
     );
 
     return () => {
-      listener.subscription.unsubscribe();
+      mounted = false;
+      subscription.unsubscribe();
     };
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
