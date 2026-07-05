@@ -1,10 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/components/AuthProvider";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) router.push("/");
+  }, [user, router]);
 
   async function signIn() {
     await supabase.auth.signInWithOtp({
@@ -19,7 +27,7 @@ export default function LoginPage() {
 
         <h2>ACCESS SYSTEM</h2>
 
-        <p>Email Authentication</p>
+        <p>Login to NymFit</p>
 
         <input
           placeholder="email@domain.com"
